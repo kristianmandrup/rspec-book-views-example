@@ -44,7 +44,7 @@ end
 describe "messages/show.html.erb" do
   it "displays the text attribute of the message" do
     render
-    response.should contain("Hello world!")
+    rendered.should contain("Hello world!")
   end
 end 
 </pre>
@@ -58,13 +58,24 @@ Hello world!
 
 <code>$ rspec spec/views/messages/show.html.erb_spec.rb </code>
 
+## Refactor View spec ##
+
+*messages/show.html.erb_spec.rb*
+<pre>
+describe "messages/show.html.erb" do
+  it "displays the text attribute of the message" do
+    assign(:message, stub("Message", :text => "Hello world!")) # added!
+    render
+    rendered.should contain("Hello world!")
+  end
+end 
+</pre>
+
 ## Refactor View ##
                                                                   
 *app/views/messages/show.html.erb*
 <pre>
-<%=h @message.text %>
+<%=@message.text %>
 </pre>
 
 <code>$ rspec spec/views/messages/show.html.erb_spec.rb </code>
-
-
