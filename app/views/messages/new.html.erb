@@ -1,5 +1,15 @@
-<%= form_for @message do |f| %>    
-  <%= f.text_field :title %>  
-  <%= f.text_area :text %>  
+#START_HIGHLIGHT
+<div class="sidebar">
+  <ul class="recent_messages">
+    <% @recent_messages.each do |message| %>
+      <li class="message"><%=h message.text %></li>
+    <% end %>
+  </ul>
+</div>
+#END_HIGHLIGHT
+
+<%= form_for @message do |f| %>
+  <%= f.text_field :title %>
+  <%= f.text_area :text %>
   <%= f.submit "Save" %>
 <% end %>

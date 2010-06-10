@@ -13,7 +13,8 @@ class Message; end
 describe "messages/new.html.erb" do   
   before(:each) do
     @message = mock_model(Message, :title => "the title").as_new_record.as_null_object 
-    assign(:message, @message)
+    assign(:message, @message) 
+    assign(:recent_messages, [])
   end  
 
   it "renders a form to create a message" do render
@@ -46,6 +47,18 @@ describe "messages/new.html.erb" do
         :content => "the message"
       )
     end    
+  end
+
+  it "renders recent messages" do
+    assign(:recent_messages, [
+      mock_model(Message, :text => "Message 1").as_null_object,
+      mock_model(Message, :text => "Message 2").as_null_object
+    ])
+    render
+    rendered.should have_selector(".recent_messages") do |sidebar|
+      sidebar.should have_selector(".message", :content => "Message 1")
+      sidebar.should have_selector(".message", :content => "Message 2")
+    end
   end
   
 end
