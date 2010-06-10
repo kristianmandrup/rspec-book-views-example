@@ -8,6 +8,9 @@
 #---
 require 'spec_helper'
 
+class Message
+end
+
 describe MessagesController, "POST create" do
   
   it "creates a new message" do
@@ -16,7 +19,7 @@ describe MessagesController, "POST create" do
   end
   
   it "saves the message" do
-    message = mock_model(Message)
+    message = mock_model(Message).as_null_object 
     Message.stub(:new).and_return message
     message.should_receive(:save)
     post :create

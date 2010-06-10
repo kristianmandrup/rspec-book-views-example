@@ -8,46 +8,22 @@
 #---
 require 'spec_helper'
 
-class Message; end
-
-describe "messages/new.html.erb" do   
+describe "messages/new.html.erb" do
   before(:each) do
-    @message = mock_model(Message, :title => "the title").as_new_record.as_null_object 
-    assign(:message, @message) 
+    assign(:message, mock_model(Message).as_null_object)
     assign(:recent_messages, [])
-  end  
-
-  it "renders a form to create a message" do render
-    rendered.should have_selector("form", 
-      :method => "post", 
-      :action => messages_path
-    ) do |form| 
-      form.should have_selector("input", :type => "submit")
-    end
   end
 
-  it "renders a form to create a message" do   
-    @message.stub(:title).and_return("the title")
-    render 
-    rendered.should have_selector("form") do |form|
-      form.should have_selector("input", 
-        :type => "text", 
-        :name => "message[title]", 
-        :value => "the title"
-      )
-    end  
-  end
+  it_should_behave_like "a template that renders the messages/form partial"
   
-  it "renders a text area for the message text" do
-    @message.stub(:text).and_return("the message")    
-    render
-    rendered.should have_selector("form") do |form|
-      form.should have_selector("textarea", 
-        :name => "message[text]", 
-        :content => "the message"
-      )
-    end    
-  end
+#  it "renders the messages/form" do 
+    # template.should_receive(:render).with(
+    #   "form", 
+    #   :message => assign(:message)
+    # )
+    # render
+    # rendered.should render_template("form")
+#  end
 
   it "renders recent messages" do
     assign(:recent_messages, [
@@ -59,6 +35,5 @@ describe "messages/new.html.erb" do
       sidebar.should have_selector(".message", :content => "Message 1")
       sidebar.should have_selector(".message", :content => "Message 2")
     end
-  end
-  
+  end 
 end
