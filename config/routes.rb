@@ -1,4 +1,5 @@
 ViewsExample::Application.routes.draw do |map|
+  resources :messages
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
