@@ -52,7 +52,6 @@ describe MessagesController, "POST create" do
     it "assigns @message" do
       post :create  
       assigns(:message).should eq(@message) 
-      # assigns[:message].should == @message
     end
 
     it "renders the new template" do
