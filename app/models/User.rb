@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   has_many :sent_messages, :class_name => Message.name, :foreign_key => "sender_id"
 
   def send_message(message_attrs) 
-    if subscription.can_send_message? self
+    if subscription.can_send_message?(self, Date.today)
       sent_messages.create! message_attrs
     end
   end   

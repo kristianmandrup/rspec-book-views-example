@@ -7,7 +7,8 @@ describe ApplicationController, "handling AccessDenied exceptions" do
       raise AccessDenied
     end
   end
-  # controller_name 'foo'
+  
+  subject { FooController }
 
   it "redirects to the /401.html (access denied) page" do
     pending("RSpec 2 guidelines")    

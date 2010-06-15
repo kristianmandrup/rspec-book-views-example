@@ -1,9 +1,8 @@
 shared_examples_for "a template that renders the messages/form partial" do
   it "renders the messages/form partial" do
-    # template.should_receive(:render).with(
-    #   :partial => "form", 
-    #   :locals => { :message => assigns[:message] }
-    # )
-    render
+    view.stub(:_render_partial)
+    view.should_receive(:_render_partial).
+      with(hash_including(:partial => "form")) 
+    render  
   end  
 end

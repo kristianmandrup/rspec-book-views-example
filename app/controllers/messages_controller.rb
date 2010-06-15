@@ -15,4 +15,10 @@ class MessagesController < ApplicationController
     end
   end
 
+  def current_user
+    @user ||= User.create! :subscription => Subscription.create!(:limit => 1)
+  end
+
+  def login_required
+  end
 end

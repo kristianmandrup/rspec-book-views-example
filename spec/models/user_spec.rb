@@ -8,7 +8,7 @@ describe User do
     end
 
     it "asks the subscription if the user can send a message" do
-      @zach.subscription.should_receive(:can_send_message?).with(@zach)
+      @zach.subscription.should_receive(:can_send_message?).with(@zach, Date.today)
       @zach.send_message(:title => "Book Update")
     end
 
